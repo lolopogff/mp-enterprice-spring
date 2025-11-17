@@ -12,7 +12,7 @@ import ru.mentee.library.domain.model.Book;
 public interface BookRepository extends JpaRepository<Book, Long> {
   Optional<Book> findByIsbn(String isbn);
 
-  @Query("SELECT b FROM Book b WHERE (:author IS NULL OR b.author = :author)")
+  @Query("SELECT b FROM Book b WHERE (:author IS NULL OR b.author = :author) AND b.author IS NOT NULL")
   List<Book> findByAuthorOptional(@Param("author") String author);
 
   boolean existsByIsbn(String isbn);
