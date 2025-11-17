@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class IsbnValidator {
-  private static final Pattern ISBN_PATTERN =
+  public static final Pattern ISBN_PATTERN =
       Pattern.compile("^(?=(?:\\D*\\d){10}(?:(?:\\D*\\d){3})?$)[\\d-]+$");
 
   public boolean isValid(String isbn) {

@@ -17,7 +17,9 @@ repositories {
 }
 
 ext {
-    set('testcontainersVersion', "1.19.7")
+    versions = [
+            testcontainersVersion: "1.19.7"
+    ]
 }
 
 dependencies {
@@ -31,7 +33,7 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok'
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testImplementation platform("org.testcontainers:testcontainers-bom:${testcontainersVersion}")
+    testImplementation platform("org.testcontainers:testcontainers-bom:${versions.testcontainersVersion}")
     testImplementation 'org.testcontainers:postgresql'
     testImplementation 'org.testcontainers:junit-jupiter'
 }
