@@ -1,0 +1,61 @@
+openapi: 3.0.3
+info:
+  title: Booking Service API
+  version: 1.0.0
+paths:
+  /api/v1/bookings:
+    post:
+      summary: Забронировать место на мероприятие
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BookingRequest'
+      responses:
+        '201':
+          description: Бронь успешно создана
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BookingResponse'
+        '400':
+          description: Некорректный запрос (например, неверный ID)
+        '404':
+          description: Мероприятие или место не найдено
+        '409':
+          description: Место уже занято или заблокировано
+        '500':
+          description: Внутренняя ошибка сервера
+
+components:
+  schemas:
+    BookingRequest:
+      type: object
+      required:
+        - eventId
+        - seatId
+        - userId
+      properties:
+        eventId:
+          type: integer
+          format: int64
+        seatId:
+          type: integer
+          format: int64
+        userId:
+          type: integer
+          format: int64
+    BookingResponse:
+      type: object
+      properties:
+        bookingId:
+          type: integer
+          format: int64
+        status:
+          type: string
+          enum: [CONFIRMED, PENDING_PAYMENT]
+        seatNumber:
+          type: string
+        eventName:
+          type: string
