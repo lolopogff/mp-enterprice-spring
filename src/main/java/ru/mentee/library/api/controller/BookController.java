@@ -3,12 +3,14 @@ package ru.mentee.library.api.controller;
 import jakarta.validation.Valid;
 import java.net.URI;
 import java.util.List;
+import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.mentee.library.api.dto.BookDto;
 import ru.mentee.library.api.dto.CreateBookRequest;
+import ru.mentee.library.domain.model.Author;
 import ru.mentee.library.service.BookService;
 
 @RestController
@@ -23,8 +25,9 @@ public class BookController {
   }
 
   @GetMapping
-  public ResponseEntity<List<BookDto>> getBooks(@RequestParam(required = false) String author) {
-    List<BookDto> books = bookService.getAllBooks(author);
+  public ResponseEntity<List<BookDto>> getBooks(
+      @RequestParam(required = false) Set<Author> authors) {
+    List<BookDto> books = bookService.getAllBooks(authors);
     return ResponseEntity.ok(books);
   }
 

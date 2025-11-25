@@ -15,10 +15,6 @@ public class CreateBookRequest {
   @Size(min = 1, max = 200, message = "В названии должно быть от 1 до 200 символов")
   private String title;
 
-  @NotBlank(message = "Имя автора является обязательным полем")
-  @Size(min = 1, max = 255, message = "Имя автора должно содержать от 1 до 255 сивловов")
-  private String author;
-
   @NotBlank(message = "ISBN is required")
   @Pattern(
       regexp = "^(?=(?:\\D*\\d){10}(?:(?:\\D*\\d){3})?$)[\\d-]+$",
